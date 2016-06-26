@@ -1,0 +1,24 @@
+
+#mysql:
+#  username: itee
+#  password: itee
+#  database: itee
+
+ldap:
+  host: ldap.local
+  port: 389
+  attribute: uid
+  base: ou=users,dc=local
+  group_base: ou=groups,dc=local
+  ssl: false
+  admin_user: cn=admin,dc=local
+  admin_password: Passw0rd
+
+admins:
+  - keijo
+  - test_admin
+
+managers:
+  - test_manager
+
+

@@ -1,0 +1,81 @@
+#!/usr/bin/ruby
+
+#
+# @author Keijo Kapp <keijo.kapp@rangeforce.com>
+# @license MIT
+#
+# i-tee docker container startup script
+# Assembles i-tee configuration files (database.yml and ldap.yml)
+# from /etc/i-tee/config.yml and executes Apache server
+#
+
+
+
+require 'yaml'
+
+configFile = YAML.load_file("/etc/i-tee/config.yml")
+
+databaseConfig = { }
+ldapConfig = { }
+
+if not configFile.key?('mysql')
+	
+	STDERR.puts 'Database configuration missing. Using internal sqlite3 configuration.'
+	
+	databaseConfig['production'] = {
+		"adapter" => 'sqlite3',
+		"database" => 'db/production.sqlite3'
+	};
+
+else
+
+	databaseConfig['production'] = {
+		"adapter" => 'mysql',
+		"database" => configFile['mysql']['database'],
+		"username" => configFile['mysql']['username'],
+		"password" => configFile['mysql']['password'],
+	}
+
+end
+
+
+if not configFile.key?('ldap')
+
+	STDERR.puts 'LDAP configuration missing. Cannot continue.'
+	exit 1
+
+else 
+
+	ldapConfig['production'] = {
+		"host" => configFile['ldap']['host'],
+		"port" => configFile['ldap']['port'],
+		"attribute" => configFile['ldap'].key?('attribute') ? configFile['ldap']['attribute'] : 'uid',
+		"base" => configFile['ldap']['base'],
+		"ssl" => configFile['ldap']['ssl'] ? true : false,
+		"admin_user" => configFile['ldap']['admin_user'],
+		"admin_password" => configFile['ldap']['admin_password'],
+		"group_base" => configFile['ldap']['group_base'],
+		"require_attribute" => {
+			"objectClass" => 'inetOrgPerson',
+			"authorizationRole" => 'postsAdmin'
+		}
+	}
+
+end
+
+
+puts 'Database config: '
+puts databaseConfig
+
+puts 'LDAP config: '
+puts ldapConfig
+
+File.open('/var/www/i-tee/config/database.yml', 'w') do |f|
+	f.write databaseConfig.to_yaml
+end
+
+File.open('/var/www/i-tee/config/ldap.yml', 'w') do |f|
+	f.write ldapConfig.to_yaml
+end
+
+exit `/usr/local/bin/run-services.sh`
