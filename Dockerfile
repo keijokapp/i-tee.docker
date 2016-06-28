@@ -2,8 +2,8 @@ FROM ubuntu:xenial
 MAINTAINER keijo.kapp@rangeforce.com
 
 COPY fs/ /
-copy phpvirtualbox /var/www/phpvirtualbox
-copy i-tee /var/www/i-tee
+COPY phpvirtualbox /var/www/phpvirtualbox
+COPY i-tee /var/www/i-tee
 
 COPY oracle_vbox_2016.asc /tmp
 
