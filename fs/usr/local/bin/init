@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
 
 #
 # @author Keijo Kapp <keijo.kapp@rangeforce.com>
@@ -63,13 +63,6 @@ else
 
 end
 
-
-puts 'Database config: '
-puts databaseConfig
-
-puts 'LDAP config: '
-puts ldapConfig
-
 File.open('/var/www/i-tee/config/database.yml', 'w') do |f|
 	f.write databaseConfig.to_yaml
 end
@@ -78,4 +71,12 @@ File.open('/var/www/i-tee/config/ldap.yml', 'w') do |f|
 	f.write ldapConfig.to_yaml
 end
 
-exit `/usr/local/bin/run-services.sh`
+`su - -s /bin/sh www-data -c 'cd /var/www/i-tee; rake db:migrate RAILS_ENV="production"'`
+
+if $?.exitstatus != 0
+	exit $?.exitstatus
+end
+
+`/usr/local/bin/run-services.sh`
+
+exit $?.exitstatus

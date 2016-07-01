@@ -2,10 +2,9 @@ FROM ubuntu:xenial
 MAINTAINER keijo.kapp@rangeforce.com
 
 COPY fs/ /
-COPY phpvirtualbox /var/www/phpvirtualbox
+COPY ruby/ /
 COPY i-tee /var/www/i-tee
-
-COPY oracle_vbox_2016.asc /tmp
+COPY phpvirtualbox /var/www/phpvirtualbox
 
 RUN /bin/sh /var/www/i-tee/utils/install.sh
 

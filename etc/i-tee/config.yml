@@ -5,7 +5,8 @@
 #  database: itee
 
 ldap:
-  host: ldap.local
+#  host: ldap.local
+  host: 172.17.0.1
   port: 389
   attribute: uid
   base: ou=users,dc=local
@@ -15,10 +16,10 @@ ldap:
   admin_password: Passw0rd
 
 admins:
-  - keijo
   - test_admin
+  - test_user
 
 managers:
   - test_manager
 
-
+skin: EIK
