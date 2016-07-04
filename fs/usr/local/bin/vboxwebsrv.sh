@@ -1,7 +1,6 @@
 #!/bin/sh
 
-VBOXWEB_USER=vbox
 
-exec /usr/bin/vboxwebsrv
+exec su - vbox -c '/usr/bin/vboxwebsrv'
 
 
