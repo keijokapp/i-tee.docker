@@ -73,7 +73,7 @@ if File.exist?('/etc/i-tee/i-tee.key') and File.exist?('/etc/i-tee/i-tee.pem')
 
 else
 
-	STDERR.puts: 'WARNING: Using snakeoil SSL key pair'
+	STDERR.puts 'WARNING: Using snakeoil SSL key pair'
 
 	File.symlink('/etc/ssl/private/ssl-cert-snakeoil.key', '/etc/ssl/private/i-tee.key')
 	File.symlink('/etc/ssl/certs/ssl-cert-snakeoil.pem', '/etc/ssl/certs/i-tee.pem')
