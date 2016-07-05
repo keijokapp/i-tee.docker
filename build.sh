@@ -37,7 +37,7 @@ sed "s@GIT_REVISION = \`git log --pretty=format:'%h %cd' -n 1\`@GIT_REVISION = '
   "$TMP/i-tee/config/initializers/version_info.rb"
 git -C "$TMP/i-tee" commit -am "Hard code revision into initializer"
 git archive --remote="$TMP/i-tee" "$ITEE_BRANCH" > "$TMP/i-tee.tar"
-rm "$TMP/i-tee"/* -rf # FIXME: does it remove hidden files?
+rm "$TMP/i-tee"/* -rf
 tar -xf "$TMP/i-tee.tar" -C "$TMP/i-tee"
 
 
