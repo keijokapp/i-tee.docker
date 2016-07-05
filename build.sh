@@ -73,4 +73,4 @@ mv "$TMP/ruby" "$DIR/ruby"
 
 # Build image
 
-docker build "$DIR"
+docker build -t i-tee "$DIR"
