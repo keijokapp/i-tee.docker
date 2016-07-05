@@ -23,3 +23,5 @@ managers:
   - test_manager
 
 skin: EIK
+rdp_host: elab.itcollege.ee
+
