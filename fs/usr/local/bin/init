@@ -89,7 +89,7 @@ File.open('/var/www/i-tee/config/ldap.yml', 'w') do |f|
 	f.write ldapConfig.to_yaml
 end
 
-`su - -s /bin/sh www-data -c 'cd /var/www/i-tee; rake db:migrate RAILS_ENV="production"'`
+`su - -s /bin/sh www-data -c 'cd /var/www/i-tee && rake db:migrate RAILS_ENV="production" && rake db:seed RAILS_ENV="production"'`
 
 if $?.exitstatus != 0
 	exit $?.exitstatus
