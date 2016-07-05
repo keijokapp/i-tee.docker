@@ -16,7 +16,7 @@ require 'yaml'
 
 if File.exist?('/usr/local/bin/checkout.sh')
 	puts `/usr/local/bin/checkout.sh`
-	if $?.fiexitstatus != 0
+	if $?.exitstatus != 0
 		exit $?.exitstatus
 	end
 end
