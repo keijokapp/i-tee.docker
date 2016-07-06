@@ -27,7 +27,8 @@ do
 	case "$1" in
 		--development) DEVELOPMENT=1
 			;;
-		*) echo "bad argument $1"
+		*) echo "bad argument $1"; exit 1
+			;;
 	esac
 	shift
 done
