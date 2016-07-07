@@ -99,10 +99,9 @@ ruby
 
 rm "$DIR/fs/var/www/i-tee" -rf
 mv "$TMP/i-tee" "$DIR/fs/var/www/i-tee"
-if [ -z "$DEVELOPMENT" ]
+rm -rf "$DIR/fs/usr/local/bin/checkout.sh"
+if [ ! -z "$DEVELOPMENT" ]
 then
-	rm -rf "$DIR/fs/usr/local/bin/checkout.sh"
-else
 	cp "$DIR/checkout.sh" "$DIR/fs/usr/local/bin/checkout.sh"
 fi
 
