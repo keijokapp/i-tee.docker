@@ -10,6 +10,6 @@ EXPOSE 80
 EXPOSE 443
 EXPOSE 4433
 
-ENTRYPOINT /usr/local/bin/init
+ENTRYPOINT [ "/usr/local/bin/init" ]
 
 
