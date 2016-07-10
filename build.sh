@@ -81,7 +81,7 @@ phpvirtualbox() {
 
 ruby() {
 	cd "$TMP"
-	curl "https://cache.ruby-lang.org/pub/ruby/$(grep -Po '[0-9]+\.[0-9]+' < $RUBY_VERSION)/ruby-$RUBY_VERSION.tar.gz" -oruby-source.tar.gz
+	curl "https://cache.ruby-lang.org/pub/ruby/ruby-$RUBY_VERSION.tar.gz" -oruby-source.tar.gz
 	tar -xf ruby-source.tar.gz
 	cd "ruby-$RUBY_VERSION"
 	# https://github.com/rbenv/ruby-build/wiki#suggested-build-environment
