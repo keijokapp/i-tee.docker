@@ -54,7 +54,7 @@ else
 		"attribute" => configFile['ldap'].key?('attribute') ? configFile['ldap']['attribute'] : 'uid',
 		"base" => configFile['ldap']['base'],
 		"ssl" => configFile['ldap']['ssl'] ? true : false,
-		"admin_user" => configFile['ldap']['admin_user'],
+		"admin_user" => configFile['ldap']['user'],
 		"admin_password" => ENV.key?('ITEE_LDAP_PASSWORD') ? ENV['ITEE_LDAP_PASSWORD']
 		                                                   : configFile['ldap']['password'],
 		"group_base" => configFile['ldap']['group_base'],
