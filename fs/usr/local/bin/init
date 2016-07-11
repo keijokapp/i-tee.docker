@@ -14,7 +14,7 @@
 require 'yaml'
 
 
-configFile = YAML.load_file("/etc/i-tee/config.yml")
+configFile = YAML.load_file("/etc/i-tee/config.yaml")
 
 databaseConfig = { }
 ldapConfig = { }
