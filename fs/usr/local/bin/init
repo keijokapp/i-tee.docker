@@ -34,7 +34,8 @@ else
 		"adapter" => 'mysql',
 		"database" => configFile['mysql']['database'],
 		"username" => configFile['mysql']['username'],
-		"password" => configFile['mysql']['password'],
+		"password" => ENV.key?('ITEE_MYSQL_PASSWORD') ? ENV['ITEE_MYSQL_PASSWORD']
+		                                              : configFile['mysql']['password'],
 	}
 
 end
@@ -54,7 +55,8 @@ else
 		"base" => configFile['ldap']['base'],
 		"ssl" => configFile['ldap']['ssl'] ? true : false,
 		"admin_user" => configFile['ldap']['admin_user'],
-		"admin_password" => configFile['ldap']['admin_password'],
+		"admin_password" => ENV.key?('ITEE_LDAP_PASSWORD') ? ENV['ITEE_LDAP_PASSWORD']
+		                                                   : configFile['ldap']['password'],
 		"group_base" => configFile['ldap']['group_base'],
 		"require_attribute" => {
 			"objectClass" => 'inetOrgPerson',
