@@ -13,6 +13,16 @@
 
 require 'yaml'
 
+if File.executable?('/usr/local/bin/checkout.sh')
+	
+	puts `/usr/local/bin/checkout.sh`
+
+	if $?.exitstatus != 0
+        	exit $?.exitstatus
+	end
+
+end
+
 
 configFile = YAML.load_file("/etc/i-tee/config.yaml")
 
