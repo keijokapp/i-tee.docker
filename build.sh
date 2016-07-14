@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ITEE_REPOSITORY="https://github.com/magavdraakon/i-tee.git"
-ITEE_BRANCH=${ITEE_BRANCH:-"docker"}
+ITEE_BRANCH=${ITEE_BRANCH:-master}
 PHPVIRTUALBOX_VERSION="5.0-5"
 RUBY_VERSION="2.2.5"
 DEVELOPMENT=
