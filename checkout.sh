@@ -1,20 +1,24 @@
+#!/bin/sh
 
 cd /var/www/i-tee
 
 set -e
 
-git checkout ${ITEE_BRANCH:="docker"}
-
-if [ -z "$ITEE_BRANCH_NORESET" ]
+if [ -z "$ITEE_BRANCH" ]
 then
+	echo "i-tee branch not specified. Skipping checkout" >2
+else
 
-	git fetch origin "$ITEE_BRANCH"
+	git fetch -a
+
+	git checkout "$ITEE_BRANCH"
 
 	git reset --hard "origin/$ITEE_BRANCH"
 
 	cp /var/www/i-tee/config/environments/production_sample.rb \
-	  /var/www/i-tee/config/environments/production.rb
+	   /var/www/i-tee/config/environments/production.rb
 
 fi
 
-echo "Using i-tee branch $ITEE_BRANCH"
+echo "i-tee branch: $(git rev-parse --abbrev-ref HEAD)"
+echo "i-tee revision: $(git log --pretty=format:'%h %cd' -n 1)"
