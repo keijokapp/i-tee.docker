@@ -9,7 +9,7 @@ then
 	echo "i-tee branch not specified. Skipping checkout" >2
 else
 
-	git fetch -a
+	git fetch -a --prune
 
 	git checkout "$ITEE_BRANCH"
 
