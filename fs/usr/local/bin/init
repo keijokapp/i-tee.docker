@@ -84,10 +84,13 @@ File.open('/var/www/i-tee/config/ldap.yml', 'w') do |f|
 end
 
 
-puts `su - -s /bin/sh www-data -c 'cd /var/www/i-tee && bundle install && rake db:migrate RAILS_ENV="production" && rake db:seed RAILS_ENV="production"'`
-
+puts `su - -s /bin/sh www-data -c 'cd /var/www/i-tee && bundle install'`
 if $?.exitstatus != 0
 	exit $?.exitstatus
 end
+
+puts `su - -s /bin/sh www-data -c 'cd /var/www/i-tee && rake db:migrate RAILS_ENV="production" && rake db:seed RAILS_ENV="production"'`
+
+# ignore exit status
 
 Kernel.exec('/usr/local/bin/run-services.sh')
