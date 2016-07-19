@@ -49,6 +49,21 @@ else
 end
 
 
+if not configFile.key?('guacamole_database')
+
+	STDERR.puts 'Guacamole database configuration missing. Cannot continue'
+	exit 1
+
+else
+
+	databaseConfig["production_guacamole"] = configFile["guacamole_database"]
+	if ENV.key?('GUACAMOLE_DATABASE_PASSWORD')
+		databaseConfig['production_guacamole']['password'] = ENV['GUACAMOLE_DATABASE_PASSWORD']
+	end
+
+end
+
+
 if not configFile.key?('ldap')
 
 	STDERR.puts 'LDAP configuration missing. Cannot continue.'
