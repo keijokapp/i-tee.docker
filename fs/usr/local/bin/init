@@ -99,7 +99,7 @@ File.open('/var/www/i-tee/config/ldap.yml', 'w') do |f|
 end
 
 
-puts `su - -s /bin/sh www-data -c 'cd /var/www/i-tee && bundle install'`
+puts `cd /var/www/i-tee && bundle install`
 if $?.exitstatus != 0
 	exit $?.exitstatus
 end
