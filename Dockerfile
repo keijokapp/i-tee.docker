@@ -12,4 +12,3 @@ EXPOSE 4433
 
 ENTRYPOINT [ "/usr/local/bin/init" ]
 
-

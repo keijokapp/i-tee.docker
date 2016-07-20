@@ -13,7 +13,7 @@ terminate() {
 
 	echo "Caught SIGTERM. Terminating"
 
-	kill -TERM $VBOXWEBSRV_PID $APACHE2_PID
+	kill -TERM $VBOXWEBSRV_PID $APACHE2_PID $PASSENGER_PID
 	wait
 
 }
@@ -27,6 +27,10 @@ VBOXWEBSRV_PID=$!
 /bin/sh /usr/local/bin/apache2.sh &
 
 APACHE2_PID=$!
+
+/bin/sh /usr/local/bin/passenger.sh &
+
+PASSENGER_PID=$!
 
 set +e
 
