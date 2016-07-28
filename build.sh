@@ -114,4 +114,9 @@ mv "$TMP/ruby" "$DIR/ruby"
 
 # Build image
 
-docker build -t i-tee "$DIR"
+if [ -z "$DEVELOPMENT" ]
+then
+	docker build -t i-tee:latest "$DIR"
+else
+	docker build -t i-tee:dev "$DIR"
+fi
