@@ -13,15 +13,6 @@
 
 require 'yaml'
 
-if File.executable?('/usr/local/bin/checkout.sh')
-	
-	puts `/usr/local/bin/checkout.sh`
-
-	if $?.exitstatus != 0
-        	exit $?.exitstatus
-	end
-
-end
 
 
 configFile = YAML.load_file("/etc/i-tee/config.yaml")
@@ -99,10 +90,16 @@ File.open('/var/www/i-tee/config/ldap.yml', 'w') do |f|
 end
 
 
-puts `cd /var/www/i-tee && bundle install`
-if $?.exitstatus != 0
-	exit $?.exitstatus
+if File.executable?('/usr/local/bin/checkout.sh')
+
+	puts `/usr/local/bin/checkout.sh`
+
+	if $?.exitstatus != 0
+		exit $?.exitstatus
+	end
+
 end
+
 
 puts `su - -s /bin/sh www-data -c 'cd /var/www/i-tee && rake db:migrate RAILS_ENV="production" && rake db:seed RAILS_ENV="production"'`
 
