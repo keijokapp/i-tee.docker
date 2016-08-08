@@ -15,6 +15,11 @@ run_sshd() {
 	done
 }
 
+
+run_vboxautostart() {
+	/usr/local/bin/vboxautostart.sh || true
+}
+
 run_vboxwebsrv() {
 	while [ -z "$EXIT" ]
 	do
@@ -33,6 +38,7 @@ run_phpvirtualbox() {
 
 
 run_sshd &
+run_vboxautostart &
 run_vboxwebsrv &
 run_phpvirtualbox &
 
