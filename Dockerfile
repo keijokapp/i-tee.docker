@@ -1,8 +1,7 @@
-FROM ubuntu:xenial
+FROM ruby:2.2.5
 MAINTAINER keijo.kapp@rangeforce.com
 
 COPY fs/ /
-COPY ruby/ /
 
 RUN /var/www/i-tee/utils/install.sh
 

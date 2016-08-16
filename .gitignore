@@ -16,7 +16,6 @@ doc/*
 etc/i-tee/i-tee.key
 etc/i-tee/i-tee.pem
 etc/i-tee/i-tee.crt
-ruby/
 fs/usr/local/bin/checkout.sh
 fs/var/www/i-tee/
 fs/var/www/phpvirtualbox/

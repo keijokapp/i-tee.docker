@@ -3,7 +3,6 @@
 ITEE_REPOSITORY="https://github.com/magavdraakon/i-tee.git"
 ITEE_BRANCH=${ITEE_BRANCH:-master}
 PHPVIRTUALBOX_VERSION="5.0-5"
-RUBY_VERSION="2.2.5"
 DEVELOPMENT=
 
 DIR=$(pwd)/$(dirname $0)
@@ -77,25 +76,10 @@ phpvirtualbox() {
 }
 
 
-# Download and build needed ruby version to $TMP/ruby
-
-ruby() {
-	cd "$TMP"
-	curl "https://cache.ruby-lang.org/pub/ruby/ruby-$RUBY_VERSION.tar.gz" -oruby-source.tar.gz
-	tar -xf ruby-source.tar.gz
-	cd "ruby-$RUBY_VERSION"
-	# https://github.com/rbenv/ruby-build/wiki#suggested-build-environment
-	apt-get install -y autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm3 libgdbm-dev
-	./configure
-	make
-	make install DESTDIR="$TMP/ruby"
-}
-
 # Copy stuff to docker context
 
 itee
 phpvirtualbox
-ruby
 
 rm "$DIR/fs/var/www/i-tee" -rf
 mv "$TMP/i-tee" "$DIR/fs/var/www/i-tee"
@@ -107,9 +91,6 @@ fi
 
 rm "$DIR/fs/var/www/phpvirtualbox" -rf
 mv "$TMP/phpvirtualbox" "$DIR/fs/var/www/phpvirtualbox"
-
-rm "$DIR/ruby" -rf
-mv "$TMP/ruby" "$DIR/ruby"
 
 
 # Build image
