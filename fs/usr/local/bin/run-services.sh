@@ -1,37 +1,43 @@
-#!/bin/sh
+#!/bin/bash
 
-# Some shitty process manager
-# Vboxwebsrv & phpvirtualbox will probably be
-# removed or moved outside this container at
-# some point, so we will not need any process
-# manager in the future
 
 set -e
 
-terminate() {
-	set -e
+EXIT=
 
-	echo "Caught SIGTERM. Terminating"
-
-	kill -TERM $VBOXWEBSRV_PID $APACHE2_PID $PASSENGER_PID
-	wait
-
+run_sshd() {
+	apt-get update
+	apt-get install -y ssh curl
+	while [ -z "$EXIT" ]
+	do
+		/usr/local/bin/sshd.sh || true
+		sleep 2
+	done
 }
 
-trap "terminate" TERM
+run_vboxwebsrv() {
+	while [ -z "$EXIT" ]
+	do
+		/usr/local/bin/vboxwebsrv.sh || true
+		sleep 2
+	done
+}
 
-/bin/sh /usr/local/bin/vboxwebsrv.sh &
+run_phpvirtualbox() {
+	while [ -z "$EXIT" ]
+	do
+		/usr/local/bin/phpvirtualbox.sh || true
+		sleep 2
+	done
+}
 
-VBOXWEBSRV_PID=$!
 
-/bin/sh /usr/local/bin/apache2.sh &
+run_sshd &
+run_vboxwebsrv &
+run_phpvirtualbox &
 
-APACHE2_PID=$!
+cd /var/www/i-tee
 
-/bin/sh /usr/local/bin/passenger.sh &
+exec /usr/local/bin/passenger start -p 80 -e production
 
-PASSENGER_PID=$!
 
-set +e
-
-wait

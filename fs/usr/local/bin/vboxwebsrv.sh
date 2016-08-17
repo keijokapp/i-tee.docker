@@ -1,6 +1,6 @@
 #!/bin/sh
 
-chown vbox:vbox /tmp/.vbox-vbox-ipc 2>/dev/null
+set -e
 
 exec su - vbox -c '/usr/bin/vboxwebsrv'
 
