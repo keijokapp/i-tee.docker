@@ -1,0 +1,36 @@
+{
+  "_comment": "Please keep this file JSON compatible",
+  "database": {
+  "adapter": "mysql2",
+    "host": "mysql.local",
+    "username": "itee",
+    "password": "itee",
+    "database": "itee"
+  },
+  "guacamole_database" : {
+    "adapter": "mysql2",
+    "host": "mysql.local",
+    "username": "guacamole",
+    "password": "guacamole",
+    "database": "guacamole"
+  },
+  "guacamole" : {
+    "url_prefix": "https://i-tee-test.local/guacamole",
+    "rdp_host": "itee.local"
+  },
+  "ldap" : {
+    "host": "ldap.local",
+    "port": 389,
+    "attribute" : "uid",
+    "base": "ou=users,dc=local",
+    "group_base" : "ou=groups,dc=local",
+    "ssl": false,
+    "user": "cn=bind-user,dc=local",
+    "password": "bind-user"
+  },
+  "admins": [ ],
+  "managers": [ ],
+  "skin": "EIK",
+  "rdp_host": "i-tee-test.local",
+  "debug": true
+}
