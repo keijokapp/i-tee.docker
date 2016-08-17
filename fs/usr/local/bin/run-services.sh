@@ -6,8 +6,6 @@ set -e
 EXIT=
 
 run_sshd() {
-	apt-get update
-	apt-get install -y ssh curl
 	while [ -z "$EXIT" ]
 	do
 		/usr/local/bin/sshd.sh || true
