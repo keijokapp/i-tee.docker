@@ -98,18 +98,6 @@ end
 
 puts "Running as uid=#{Etc.getpwnam('vbox').uid} gid=#{Etc.getgrnam('vbox').gid}"
 
-
-if File.executable?('/usr/local/bin/checkout.sh')
-
-	puts `/usr/local/bin/checkout.sh 2>&1`
-
-	if $?.exitstatus != 0
-		exit $?.exitstatus
-	end
-
-end
-
-
 puts `su - -s /bin/sh www-data -c 'cd /var/www/i-tee && rake db:migrate RAILS_ENV=production' 2>&1`
 
 # ignore exit status
