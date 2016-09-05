@@ -98,8 +98,9 @@ end
 
 puts "Running as uid=#{Etc.getpwnam('vbox').uid} gid=#{Etc.getgrnam('vbox').gid}"
 
-puts `su - -s /bin/sh www-data -c 'cd /var/www/i-tee && rake db:migrate RAILS_ENV=production' 2>&1`
+puts `cd /var/www/i-tee && rake db:migrate RAILS_ENV=production 2>&1`
 
 # ignore exit status
 
 Kernel.exec('/usr/local/bin/run-services.sh')
+
