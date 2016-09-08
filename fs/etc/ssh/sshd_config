@@ -19,8 +19,6 @@ HostbasedAuthentication no
 ChallengeResponseAuthentication no
 PasswordAuthentication no
 
-TCPKeepAlive yes
-
 AcceptEnv LANG LC_*
 
 ForceCommand "/usr/local/bin/ssh-forward.sh"
