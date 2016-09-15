@@ -1,3 +1,11 @@
-#!/bin/sh
+#!/bin/bash
 
-exec ssh vbox@host.local -- vboxmanage "$@"
+QUOTE_ARGS=''
+for ARG in "$@"
+do
+  ARG=$(printf "%q" "$ARG")
+  QUOTE_ARGS="${QUOTE_ARGS} $ARG"
+done
+
+ssh vbox@host.local "vboxmanage ${QUOTE_ARGS}"
+
