@@ -17,6 +17,6 @@ ssh_master_client &
 
 cd /var/www/i-tee
 
-exec /usr/local/bundle/bin/passenger start -p 80 -e production
+exec /usr/local/bundle/bin/passenger start -p 80 -e production --log-file /dev/stderr
 
 

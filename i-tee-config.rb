@@ -6,9 +6,7 @@ ITee::Application.configure do
   config.i18n.fallbacks = true
   config.action_dispatch.x_sendfile_header = 'X-Sendfile'
   config.active_support.deprecation = :notify
-
-  # Use a different logger for distributed setups
-  # config.logger = SyslogLogger.new
+  config.logger = Logger.new(STDOUT)
 
 
   configFile = { }
