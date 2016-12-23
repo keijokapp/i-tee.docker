@@ -5,9 +5,8 @@ RUN apt-get update && \
 	apt-get install -y --no-install-recommends sudo openssh-client libyaml-0-2 libgmp-dev libmysqlclient-dev libsqlite3-dev && \
 	gem install bundler
 COPY fs/ /
-RUN	cp /var/www/i-tee/config/environments/production_sample.rb \
-		/var/www/i-tee/config/environments/production.rb && \
-	cd /var/www/i-tee && bundle install
+COPY i-tee-config.rb /var/www/i-tee/config/environments/production.rb
+RUN cd /var/www/i-tee && bundle install
 
 RUN groupadd -og 0 vboxusers && useradd -Md /root -g vboxusers -ou 0 vbox
 
