@@ -47,6 +47,26 @@ ITee::Application.configure do
   # Virtualbox user and command line for launching scripts
   config.cmd_perfix = 'sudo -Hu vbox'
 
+  config.database = {
+    "production" => configFile['database'],
+    "production_guacamole" => configFile['guacamole_database']
+  }
+
+  config.ldap = {
+    "host" => configFile['ldap']['host'],
+    "port" => configFile['ldap']['port'],
+    "attribute" => configFile['ldap'].key?('attribute') ? configFile['ldap']['attribute'] : 'uid',
+    "base" => configFile['ldap']['base'],
+    "ssl" => configFile['ldap']['ssl'] ? true : false,
+    "admin_user" => configFile['ldap']['user'],
+    "admin_password" => configFile['ldap']['password'],
+    "group_base" => configFile['ldap']['group_base'],
+    "require_attribute" => {
+      "objectClass" => 'inetOrgPerson',
+      "authorizationRole" => 'postsAdmin'
+    }
+  }
+
   # Guacamole configuration
   if configFile.key?('guacamole')
     config.guacamole = {
