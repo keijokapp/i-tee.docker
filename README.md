@@ -107,25 +107,3 @@ rdp_host: "i-tee-host.local"
 # friendlier errors in HTTP responses.
 development: true
 ```
-
-# Development
-
-Mount I-Tee source tree to `/var/www/i-tee` by using `--volume` option. It needs to be writeble by container because init script creates `database.yml` and `ldap.yml` files. Make sure you create `config/environments/production.rb` from `config/environments/production_sample.rb`. If `development` configuration parameter is set to `true`, live code updates should work.
-
-
-```sh
-docker run -d \
-	--name i-tee \
-	--publish "8080:80" \
-	--volume /etc/i-tee/config.yaml:/etc/i-tee/config.yaml:ro \
-	--volume /etc/i-tee/id_rsa:/root/.ssh/id_rsa:ro \
-	--volume /etc/i-tee/known_hosts:/root/.ssh/known_hosts:ro \
-	--volume /path/to/i-tee.docker/fs/var/www/i-tee:/var/www/i-tee \
-	keijokapp/i-tee:latest
-```
-
-To run commands inside container use `docker exec i-tee command`. Options `-t` and `-i` are needed for interactive commands.
-
-```sh
-docker exec -ti i-tee bash
-```
