@@ -11,10 +11,6 @@ do
 done &
 
 
-cd /var/www/i-tee
-
-rake db:migrate RAILS_ENV=production 2>&1
-
 exec /usr/local/bundle/bin/passenger start -p 80 -e production --log-file /dev/stderr
 
 
