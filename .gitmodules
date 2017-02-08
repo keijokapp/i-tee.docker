@@ -1,6 +1,3 @@
-[submodule "fs/var/www/phpvirtualbox"]
-	path = fs/var/www/phpvirtualbox
-	url = https://github.com/imoore76/phpvirtualbox
-[submodule "fs/var/www/i-tee"]
-	path = fs/var/www/i-tee
+[submodule "i-tee"]
+	path = i-tee
 	url = https://github.com/magavdraakon/i-tee
