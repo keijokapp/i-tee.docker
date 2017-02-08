@@ -1,4 +1,6 @@
-This repository is used to build docker images for [I-Tee](https://github.com/magavdraakon/i-tee) virtual IT laboratory system. Some additional componennts needed to run full system include:
+###Docker-related files have been removed [I-Tee](https://github.com/magavdraakon/i-tee) repository. This README remains for some time.
+
+Some additional componennts needed to run full system include:
 
  * Fully working Virtualbox 5.0 installation (inc. extension pack) on host
  * MySQL (or any other database if it works)
@@ -6,18 +8,17 @@ This repository is used to build docker images for [I-Tee](https://github.com/ma
  * Guacamole frontend server and Guacamole daemon to let users connect to machines via browser. [`glyptodon/guacamole`](https://github.com/glyptodon/guacamole-docker) and [`glyptodon/guacd`](https://github.com/glyptodon/guacd-docker) do the work if you prefer containerized installations.
 
 Additional recommended components include
- * phpVirtualbox ([`keijokapp/phpvirtualbox`](https://github.com/keijokapp/phpvirtualbox.docker))
+ * phpVirtualBox (Docker image: [`keijokapp/phpvirtualbox`](https://github.com/keijokapp/phpvirtualbox.docker))
  * Proxy server for TLS and greater flexibility.
 
 # Build
 
 ```sh
-git clone https://github.com/keijokapp/i-tee.docker.git
-cd i-tee.docker
-git submodule update --init --recursive
+git clone https://github.com/magavdraakon/i-tee
+cd i-tee
 
-# Create revision.txt file to container so I-Tee can show its build commit without using Git. (optional)
-git ls-tree dev fs/var/www/i-tee --abbrev | awk '{print $3}' > fs/var/www/i-tee/revision.txt
+# Create revision.txt file I-Tee can show its build commit without using Git. (optional)
+git rev-parse HEAD > revision.txt
 
 docker build -t keijokapp/i-tee:latest .
 ```
@@ -28,18 +29,22 @@ You need to generate SSH key pair to allow I-Tee to use Virtualbox CLI on host. 
 
 `/var/labs/run` should contain prewritten and generated VM start scripts. `/var/labs/exports` is needed for importing and exporting labs.
 
+You should also generate secure random 128 character string (as in example), which is apparently used by Rails to sign application cookies.
+
 ```sh
-docker run -d \
+docker create \
 	--name i-tee \
 	--publish "8080:80" \
+	--add-host "host.local:172.17.0.1"
+	--env "ITEE_SECRET_TOKEN=7NADS4HUYkO9dD0bTJDrzDyfk8Rcf458lrsFEyKvzTzdGSa2Vb5IR1XmT05yUmKUJ9WOzjoafoa0NV8ghYrF8LcTDsIO8NpnkEO6yRG0URElion8o1aa4yXswoN3U2q6" \
 	--volume /etc/i-tee/config.yaml:/etc/i-tee/config.yaml:ro \
 	--volume /etc/i-tee/id_rsa:/root/.ssh/id_rsa:ro \
 	--volume /etc/i-tee/known_hosts:/root/.ssh/known_hosts:ro \
 	--volume /var/labs/exports:/var/labs/exports \
 	--volume /var/labs/run:/var/labs/run \
+	-t \
 	keijokapp/i-tee:latest
 ```
-
 
 # Configuration
 
