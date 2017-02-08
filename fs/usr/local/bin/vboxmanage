@@ -7,5 +7,5 @@ do
   QUOTE_ARGS="${QUOTE_ARGS} $ARG"
 done
 
-ssh vbox@host.local "vboxmanage ${QUOTE_ARGS}"
+ssh -o "ControlMaster=auto" -o "ControlPath=/tmp/ssh_vbox.socket" -o "ControlPersist=1h" vbox@host.local "vboxmanage ${QUOTE_ARGS}"
 

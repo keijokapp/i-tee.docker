@@ -16,5 +16,5 @@ WORKDIR /var/www/i-tee
 
 EXPOSE 80
 
-ENTRYPOINT [ "/usr/local/bin/init" ]
+ENTRYPOINT [ "/usr/local/bundle/bin/passenger", "start", "-p", "80", "-e", "production", "--log-file", "/dev/stderr" ]
 
